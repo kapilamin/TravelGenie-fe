@@ -47,10 +47,22 @@ export default function App() {
             component={OnboardingScreen3}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="login" component={Login} />
-          <Stack.Screen name="select-city" component={SelectCity} />
-          <Stack.Screen name="select-dates" component={SelectDates} />
-          <Stack.Screen name="select-budget" component={SelectBudget} />
+          <Stack.Screen
+            name="login"
+            component={Login}
+          />
+          <Stack.Screen
+            name="select-city"
+            component={SelectCity}
+          />
+          <Stack.Screen
+            name="select-dates"
+            component={SelectDates}
+          />
+          <Stack.Screen
+            name="select-budget"
+            component={SelectBudget}
+          />
           <Stack.Screen
             name="generate-outbound-flights"
             component={GenerateOutboundFlights}
@@ -59,12 +71,19 @@ export default function App() {
             name="generate-inbound-flights"
             component={GenerateInboundFlights}
           />
-          <Stack.Screen name="generate-hotels" component={GenerateHotels} />
+          <Stack.Screen
+            name="generate-hotels"
+            component={GenerateHotels}
+          />
           <Stack.Screen
             name="generate-excursions"
             component={GenerateExcursions}
           />
-          <Stack.Screen name="confirm-booking" component={ConfirmBooking} />
+          <Stack.Screen
+            name="confirm-booking"
+            component={ConfirmBooking}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
