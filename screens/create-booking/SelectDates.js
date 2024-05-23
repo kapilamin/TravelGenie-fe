@@ -1,25 +1,46 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { useState } from "react";
 import React from "react";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const SelectDates = ({ navigation, route }) => {
   const { outboundAirport, inboundAirport } = route.params;
-  const [departDate, setDepartDate] = useState("2024-09-01");
-  const [returnDate, setReturnDate] = useState("2024-09-08");
+  const [departDate, setDepartDate] = useState(new Date());
+  const [returnDate, setReturnDate] = useState(new Date());
+  const [dateDepart, setDateDepart] = useState(new Date());
+  const [dateReturn, setDateReturn] = useState(new Date());
+  const convertDateFormat = (dateString) => {
+    const [day, month, year] = dateString.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
+
+
+  function onDepartChange(_, selectedDate) {
+    const formattedDate = selectedDate.toLocaleDateString()
+    setDateDepart(selectedDate)
+    setDepartDate(convertDateFormat(selectedDate.toLocaleDateString()));
+    ;
+  }
+  function onReturnChange(_, selectedDate) {
+    setDateReturn(selectedDate)
+    setReturnDate(convertDateFormat(selectedDate.toLocaleDateString()));
+    ;
+  }
+
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Select dates</Text>
-      <TextInput
-        placeholder="Enter departure date"
-        value={departDate}
-        onChangeText={setDepartDate}
-      ></TextInput>
-      <TextInput
-        placeholder="Enter return date"
-        value={returnDate}
-        setReturnDate
-        onChangeText={setReturnDate}
-      ></TextInput>
+      <DateTimePicker
+        value={dateDepart}
+        mode="date"
+        onChange={onDepartChange}
+      ></DateTimePicker>
+      <DateTimePicker
+        value={dateReturn}
+        mode="date"
+        onChange={onReturnChange}
+      ></DateTimePicker>
       <Button
         title="Confirm"
         onPress={() =>
@@ -37,4 +58,6 @@ const SelectDates = ({ navigation, route }) => {
 
 export default SelectDates;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+});
