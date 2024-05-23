@@ -74,7 +74,7 @@ const GenerateHotels = ({ navigation, route }) => {
             <Button
               title={"Confirm Hotel"}
               onPress={() =>
-                navigation.navigate("generate-hotels", {
+                navigation.navigate("generate-excursions", {
                   selectedOutboundFlight,
                   selectedInboundFlight,
                   outboundAirport,
@@ -82,6 +82,7 @@ const GenerateHotels = ({ navigation, route }) => {
                   departDate,
                   returnDate,
                   budget,
+                  selectedHotel,
                 })
               }
             ></Button>

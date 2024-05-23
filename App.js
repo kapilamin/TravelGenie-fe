@@ -13,6 +13,8 @@ import GenerateOutboundFlights from "./screens/create-booking/GenerateOutboundFl
 import GenerateInboundFlights from "./screens/create-booking/GenerateInboundFlights";
 import GenerateHotels from "./screens/create-booking/GenerateHotels";
 import { SafeAreaView } from "react-native";
+import GenerateExcursions from "./screens/create-booking/GenerateExcursions";
+import ConfirmBooking from "./screens/create-booking/ConfirmBooking";
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +60,11 @@ export default function App() {
             component={GenerateInboundFlights}
           />
           <Stack.Screen name="generate-hotels" component={GenerateHotels} />
+          <Stack.Screen
+            name="generate-excursions"
+            component={GenerateExcursions}
+          />
+          <Stack.Screen name="confirm-booking" component={ConfirmBooking} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

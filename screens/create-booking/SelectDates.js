@@ -4,8 +4,8 @@ import React from "react";
 
 const SelectDates = ({ navigation, route }) => {
   const { outboundAirport, inboundAirport } = route.params;
-  const [departDate, setDepartDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
+  const [departDate, setDepartDate] = useState("2024-09-01");
+  const [returnDate, setReturnDate] = useState("2024-09-08");
   return (
     <View>
       <Text>Select dates</Text>

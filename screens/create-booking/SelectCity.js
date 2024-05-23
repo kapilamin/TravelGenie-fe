@@ -3,8 +3,8 @@ import React from "react";
 import { useState } from "react";
 
 const SelectCity = ({ navigation }) => {
-  const [outboundAirport, setOutboundAirport] = useState("");
-  const [inboundAirport, setInboundAirport] = useState("");
+  const [outboundAirport, setOutboundAirport] = useState("BKK");
+  const [inboundAirport, setInboundAirport] = useState("MAN");
 
   return (
     <View>
