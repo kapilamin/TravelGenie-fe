@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View, Button, Image, Pressable } from "react-native";
 import React from "react";
+import TextBold from "../TextBold";
+import TextReg from "../TextReg";
 
 const OnboardingScreen1 = ({ navigation }) => {
   return (
@@ -8,10 +10,12 @@ const OnboardingScreen1 = ({ navigation }) => {
         source={require("../../assets/screen1.png")}
         style={styles.image}
       />
-      <Text style={styles.heading}>Take the hassle out of your next trip</Text>
-      <Text style={styles.subheading}>
+      <TextBold style={styles.heading}>
+        Take the hassle out of your next trip
+      </TextBold>
+      <TextReg style={styles.subheading}>
         Book your flights, hotels & excursions in one place
-      </Text>
+      </TextReg>
       <Pressable
         style={({ pressed }) => [
           {
@@ -78,6 +82,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 18,
-    textAlign: "center",
+    TextAlign: "center",
   },
 });

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getHotelsAndDeals } from "../../api/api";
+import { cityToCode, codeToCity } from "../../utils/iataAirportCodes";
 
 const GenerateHotels = ({ navigation, route }) => {
   const [hotels, setHotels] = useState([]);
@@ -27,7 +28,9 @@ const GenerateHotels = ({ navigation, route }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    getHotelsAndDeals(outboundAirport, departDate, returnDate).then(
+    const outboundAirportCode = cityToCode(outboundAirport);
+
+    getHotelsAndDeals(outboundAirportCode, departDate, returnDate).then(
       (hotelData) => {
         setIsLoading(false);
         setHotels(hotelData);
@@ -66,7 +69,9 @@ const GenerateHotels = ({ navigation, route }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Select Hotel</Text>
       {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+        </View>
       ) : (
         <>
           <FlatList data={hotels} renderItem={renderHotelItem} />
@@ -98,6 +103,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    height: "90%",
   },
   title: {
     fontSize: 24,

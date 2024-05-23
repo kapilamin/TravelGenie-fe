@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-
+import { cityToCode, codeToCity } from "../../utils/iataAirportCodes";
 import { getFlights } from "../../api/api";
 
 const GenerateInboundFlights = ({ navigation, route }) => {
@@ -27,7 +27,9 @@ const GenerateInboundFlights = ({ navigation, route }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    getFlights(inboundAirport, outboundAirport, returnDate).then(
+    const outboundAirportCode = cityToCode(outboundAirport);
+    const inboundAirportCode = cityToCode(inboundAirport);
+    getFlights(inboundAirportCode, outboundAirportCode, returnDate).then(
       (flightData) => {
         setIsLoading(false);
         setFlights(flightData);
@@ -66,7 +68,9 @@ const GenerateInboundFlights = ({ navigation, route }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Select Inbound Flight</Text>
       {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+        </View>
       ) : (
         <>
           <FlatList
@@ -102,6 +106,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    height: "90%",
   },
   title: {
     fontSize: 24,

@@ -76,7 +76,9 @@ const GenerateExcursions = ({ navigation, route }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Select Excursions</Text>
       {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+        </View>
       ) : (
         <>
           <FlatList data={excursions} renderItem={renderExcursionItem} />
@@ -108,6 +110,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    height: "90%",
   },
   title: {
     fontSize: 24,

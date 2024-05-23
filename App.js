@@ -15,6 +15,13 @@ import GenerateHotels from "./screens/create-booking/GenerateHotels";
 import { SafeAreaView } from "react-native";
 import GenerateExcursions from "./screens/create-booking/GenerateExcursions";
 import ConfirmBooking from "./screens/create-booking/ConfirmBooking";
+import AppLoading from "expo-app-loading";
+
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +35,15 @@ const MyTheme = {
 };
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <NavigationContainer theme={MyTheme}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -50,34 +66,42 @@ export default function App() {
           <Stack.Screen
             name="login"
             component={Login}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="select-city"
             component={SelectCity}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="select-dates"
             component={SelectDates}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="select-budget"
             component={SelectBudget}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="generate-outbound-flights"
             component={GenerateOutboundFlights}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="generate-inbound-flights"
             component={GenerateInboundFlights}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="generate-hotels"
             component={GenerateHotels}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="generate-excursions"
             component={GenerateExcursions}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="confirm-booking"
