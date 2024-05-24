@@ -10,10 +10,11 @@ import {
 import { useState } from "react";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
+import { cityToEmoji } from "../../utils/cityToFlag";
 
 const SelectCity = ({ navigation }) => {
-  const [outboundAirport, setOutboundAirport] = useState("Bangkok");
-  const [inboundAirport, setInboundAirport] = useState("Manchester");
+  const [outboundAirport, setOutboundAirport] = useState("");
+  const [inboundAirport, setInboundAirport] = useState("");
 
   return (
     <View style={styles.outerContainer}>
@@ -21,10 +22,8 @@ const SelectCity = ({ navigation }) => {
         <TextBold style={styles.title}>Where do you want to go?</TextBold>
         <TextReg style={styles.inputHeading}>Flying from:</TextReg>
         <View style={styles.inputContainer}>
-          <Image
-            source={require("../../assets/pin.png")}
-            style={styles.image}
-          />
+          <Text>{cityToEmoji(outboundAirport)} </Text>
+
           <TextInput
             style={styles.input}
             placeholderTextColor="#B0B0B0"
@@ -34,10 +33,7 @@ const SelectCity = ({ navigation }) => {
         </View>
         <TextReg style={styles.inputHeading}>Flying to:</TextReg>
         <View style={styles.inputContainer}>
-          <Image
-            source={require("../../assets/pin.png")}
-            style={styles.image}
-          />
+          <Text>{cityToEmoji(inboundAirport)} </Text>
           <TextInput
             style={styles.input}
             placeholderTextColor="#B0B0B0"

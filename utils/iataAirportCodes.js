@@ -179,9 +179,7 @@ cityToCodeLookup = {
   Tokyo: "NRT",
   Toronto: "YYZ",
   Vancouver: "YVR",
-
   Chicago: "ORD",
-
   Washington: "IAD",
   Atlanta: "ATL",
   Miami: "MIA",

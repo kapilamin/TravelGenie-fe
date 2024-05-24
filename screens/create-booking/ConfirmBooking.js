@@ -27,7 +27,7 @@ const ConfirmBooking = ({ navigation, route }) => {
   } = route.params;
 
   useEffect(() => {
-    console.log(selectedOutboundFlight)
+    console.log(selectedOutboundFlight);
   }, []);
   return (
     <View style={styles.container}>
@@ -52,7 +52,7 @@ const ConfirmBooking = ({ navigation, route }) => {
               {cityToEmoji(outboundAirport)}
             </TextReg>
           </View>
-          <TextReg>{outboundAirport}</TextReg>
+          <TextBold>{outboundAirport}</TextBold>
           <TextReg>
             {selectedOutboundFlight.itineraries[0].segments[0].departure.at
               .split("T")[0]
@@ -72,11 +72,12 @@ const ConfirmBooking = ({ navigation, route }) => {
           source={require("../../assets/arrow-right-dark.png")}
           style={styles.arrow}
         />
+      
         <View style={styles.flightCard}>
           <View style={styles.flagCard}>
             <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
           </View>
-          <TextReg>{inboundAirport}</TextReg>
+          <TextBold>{inboundAirport}</TextBold>
           <TextReg>
             {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
               .split("T")[0]
@@ -98,7 +99,7 @@ const ConfirmBooking = ({ navigation, route }) => {
           <View style={styles.flagCard}>
             <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
           </View>
-          <TextReg>{inboundAirport}</TextReg>
+          <TextBold>{inboundAirport}</TextBold>
           <TextReg>
             {selectedInboundFlight.itineraries[0].segments[0].departure.at
               .split("T")[0]
@@ -124,7 +125,7 @@ const ConfirmBooking = ({ navigation, route }) => {
               {cityToEmoji(outboundAirport)}
             </TextReg>
           </View>
-          <TextReg>{outboundAirport}</TextReg>
+          <TextBold>{outboundAirport}</TextBold>
           <TextReg>
             {selectedInboundFlight.itineraries[0].segments[0].arrival.at
               .split("T")[0]
@@ -144,29 +145,32 @@ const ConfirmBooking = ({ navigation, route }) => {
       <View>
         <TextBold style={styles.costText}>Cost</TextBold>
         <View style={styles.costRow}>
-          <TextReg style={styles.costText}>Hotel (5 Night)</TextReg>
+          <TextReg style={styles.costText}>Hotel</TextReg>
           <TextReg style={styles.price}>
-            {selectedHotel.offers[0].price.total}
+            £{Number(selectedHotel.offers[0].price.total).toFixed(2)}
           </TextReg>
         </View>
         <View style={styles.costRow}>
           <TextReg style={styles.costText}>Outbound Flight</TextReg>
           <TextReg style={styles.price}>
-            {Number(selectedInboundFlight.price.grandTotal)}
+            £{Number(selectedInboundFlight.price.grandTotal).toFixed(2)}
           </TextReg>
         </View>
         <View style={styles.costRow}>
           <TextReg style={styles.costText}>Inbound Flight</TextReg>
           <TextReg style={styles.price}>
-            {Number(selectedOutboundFlight.price.grandTotal)}
+            £{Number(selectedOutboundFlight.price.grandTotal).toFixed(2)}
           </TextReg>
         </View>
         <View style={styles.costRow}>
           <TextBold style={styles.costText}>Total</TextBold>
           <TextReg style={styles.price}>
-            {Number(selectedHotel.offers[0].price.total) +
+            £
+            {(
+              Number(selectedHotel.offers[0].price.total) +
               Number(selectedInboundFlight.price.grandTotal) +
-              Number(selectedOutboundFlight.price.grandTotal)}
+              Number(selectedOutboundFlight.price.grandTotal)
+            ).toFixed(2)}
           </TextReg>
         </View>
 
@@ -246,7 +250,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-    
   },
   flightRow: {
     flexDirection: "row",

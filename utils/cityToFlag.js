@@ -165,7 +165,7 @@ cityToEmojiLookup = {
 };
 
 function cityToEmoji(city) {
-  return cityToEmojiLookup[city] || "🤔";
+  return cityToEmojiLookup[city] || null;
 }
 
 export { cityToEmoji };
