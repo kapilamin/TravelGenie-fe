@@ -192,7 +192,6 @@ cityToCodeLookup = {
   Seattle: "SEA",
   Philadelphia: "PHL",
   Phoenix: "PHX",
-
   Minneapolis: "MSP",
   Detroit: "DTW",
   Orlando: "MCO",

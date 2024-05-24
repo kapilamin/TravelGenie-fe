@@ -10,6 +10,8 @@ import {
 import React, { useEffect, useState } from "react";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
+import { codeToCity } from "../../utils/iataAirportCodes";
+import { cityToEmoji } from "../../utils/cityToFlag";
 
 const ConfirmBooking = ({ navigation, route }) => {
   const {
@@ -24,14 +26,7 @@ const ConfirmBooking = ({ navigation, route }) => {
     selectedExcursions,
   } = route.params;
 
-  useEffect(() => {
-    // selectedOutboundFlight.itineraries[0].segments[0] -> flying out from airport (BKK)
-    // selectedOutboundFlight.itineraries[0].segments[1] -> landing airport (MAN)
-    console.log(
-      selectedOutboundFlight.itineraries[0].segments[0].departure.iataCode,
-      selectedOutboundFlight.itineraries[0].segments[1].arrival.iataCode
-    );
-  }, []);
+  useEffect(() => {}, []);
   return (
     <View style={styles.container}>
       <TextReg style={styles.heading}>Your Holiday</TextReg>
@@ -48,10 +43,12 @@ const ConfirmBooking = ({ navigation, route }) => {
       <View style={styles.flightRow}>
         <View style={styles.flightCard}>
           <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>🇬🇧</TextReg>
+            <TextReg style={styles.flag}>
+              {cityToEmoji(outboundAirport)}
+            </TextReg>
           </View>
-          <TextReg>Manchester</TextReg>
-          <TextReg>Manchester</TextReg>
+          <TextReg>{outboundAirport}</TextReg>
+          <TextReg>{outboundAirport}</TextReg>
           <TextReg>23/05/24 11:00AM</TextReg>
         </View>
         <Image
@@ -60,20 +57,20 @@ const ConfirmBooking = ({ navigation, route }) => {
         />
         <View style={styles.flightCard}>
           <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>🇹🇭</TextReg>
+            <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
           </View>
-          <TextReg>Manchester</TextReg>
-          <TextReg>Manchester</TextReg>
+          <TextReg>{inboundAirport}</TextReg>
+          <TextReg>{inboundAirport}</TextReg>
           <TextReg>23/05/24 11:00AM</TextReg>
         </View>
       </View>
       <View style={styles.flightRow}>
         <View style={styles.flightCard}>
           <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>🇹🇭</TextReg>
+            <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
           </View>
-          <TextReg>Manchester</TextReg>
-          <TextReg>Manchester</TextReg>
+          <TextReg>{inboundAirport}</TextReg>
+          <TextReg>{inboundAirport}</TextReg>
           <TextReg>23/05/24 11:00AM</TextReg>
         </View>
         <Image
@@ -82,10 +79,12 @@ const ConfirmBooking = ({ navigation, route }) => {
         />
         <View style={styles.flightCard}>
           <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>🇬🇧</TextReg>
+            <TextReg style={styles.flag}>
+              {cityToEmoji(outboundAirport)}
+            </TextReg>
           </View>
-          <TextReg>Manchester</TextReg>
-          <TextReg>Manchester</TextReg>
+          <TextReg>{outboundAirport}</TextReg>
+          <TextReg>{outboundAirport}</TextReg>
           <TextReg>23/05/24 11:00AM</TextReg>
         </View>
       </View>

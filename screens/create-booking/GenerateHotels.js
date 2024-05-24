@@ -31,9 +31,9 @@ const GenerateHotels = ({ navigation, route }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const outboundAirportCode = cityToCode(outboundAirport);
+    const inboundAirportCode = cityToCode(inboundAirport);
 
-    getHotelsAndDeals(outboundAirportCode, departDate, returnDate)
+    getHotelsAndDeals(inboundAirportCode, departDate, returnDate)
       .then((hotelData) => {
         setIsLoading(false);
         setHotels(hotelData);
@@ -67,7 +67,13 @@ const GenerateHotels = ({ navigation, route }) => {
           <View style={styles.textContainer}>
             <Text style={styles.airlineText}>{item.hotel.name}</Text>
             <Text style={styles.departureText}>
-              Room Type: {item.offers[0].room.category}
+              Room Type:{" "}
+              {item.offers[0].room.typeEstimated.category
+                .replace(/_/g, " ")
+                .toLowerCase()
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
             </Text>
           </View>
         </View>

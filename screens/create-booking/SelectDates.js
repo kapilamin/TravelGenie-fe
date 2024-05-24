@@ -75,19 +75,7 @@ const SelectDates = ({ navigation, route }) => {
           </View>
         </View>
 
-        <View style={styles.datePickerContainer}>
-          {/* <Button
-            title="Confirm"
-            onPress={() =>
-              navigation.navigate("select-budget", {
-                outboundAirport,
-                inboundAirport,
-                departDate,
-                returnDate,
-              })
-            }
-          ></Button> */}
-        </View>
+        <View style={styles.datePickerContainer}></View>
 
         <TouchableOpacity
           style={styles.button}
