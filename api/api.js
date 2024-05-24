@@ -55,7 +55,7 @@ const getHotelsByCity = async (cityCode) => {
       {
         params: {
           cityCode,
-          radius: 1,
+          radius: 5,
           radiusUnit: "KM",
         },
       }

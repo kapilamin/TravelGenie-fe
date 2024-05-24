@@ -5,11 +5,14 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-  Button,
+  Pressable,
+  Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getHotelsAndDeals } from "../../api/api";
 import { cityToCode, codeToCity } from "../../utils/iataAirportCodes";
+import TextReg from "../TextReg";
+import TextBold from "../TextBold";
 
 const GenerateHotels = ({ navigation, route }) => {
   const [hotels, setHotels] = useState([]);
@@ -30,12 +33,14 @@ const GenerateHotels = ({ navigation, route }) => {
     setIsLoading(true);
     const outboundAirportCode = cityToCode(outboundAirport);
 
-    getHotelsAndDeals(outboundAirportCode, departDate, returnDate).then(
-      (hotelData) => {
+    getHotelsAndDeals(outboundAirportCode, departDate, returnDate)
+      .then((hotelData) => {
         setIsLoading(false);
         setHotels(hotelData);
-      }
-    );
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   const handleHotelSelect = (hotel) => {
@@ -43,54 +48,79 @@ const GenerateHotels = ({ navigation, route }) => {
   };
 
   const renderHotelItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => handleHotelSelect(item)}
-      style={
-        item.offers[0].id === selectedHotel?.offers[0].id
-          ? styles.selectedFlightItem
-          : styles.flightItem
-      }
-    >
-      <Text style={styles.flightText}>Hotel name: {item.hotel.name}</Text>
-      <Text style={styles.flightText}>
-        Room Type: {item.offers[0].room.category}
-      </Text>
-      <Text style={styles.flightText}>
-        Description: {item.offers[0].room.description.text}
-      </Text>
-      <Text style={styles.flightText}>
-        Price: {item.offers[0].price.total}
-        {item.offers[0].price.currency}
-      </Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => handleHotelSelect(item)}
+        style={
+          item.offers[0].id === selectedHotel?.offers[0].id
+            ? styles.selectedFlightItem
+            : styles.flightItem
+        }
+      >
+        <View style={styles.flightInfoContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={require("../../assets/hotel.png")}
+              style={styles.image}
+            />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.airlineText}>{item.hotel.name}</Text>
+            <Text style={styles.departureText}>
+              Room Type: {item.offers[0].room.category}
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.priceText}>
+          {item.offers[0].price.total.split(".")[0]}
+          {item.offers[0].price.currency}
+        </Text>
+        <Pressable
+          onPress={() => navigation.navigate("hotelDetails", { hotel: item })}
+        >
+          <Image
+            source={require("../../assets/info.png")}
+            style={styles.arrowImage}
+          />
+        </Pressable>
+      </TouchableOpacity>
+    </View>
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Select Hotel</Text>
+    <View style={styles.flightContainer}>
+      <TextBold style={styles.title}>Select Hotel</TextBold>
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#007AFF" />
         </View>
       ) : (
         <>
-          <FlatList data={hotels} renderItem={renderHotelItem} />
+          <FlatList
+            data={hotels}
+            renderItem={renderHotelItem}
+            keyExtractor={(item) => item.offers[0].id.toString()}
+          />
           {selectedHotel && (
-            <Button
-              title={"Confirm Hotel"}
-              onPress={() =>
-                navigation.navigate("generate-excursions", {
-                  selectedOutboundFlight,
-                  selectedInboundFlight,
-                  outboundAirport,
-                  inboundAirport,
-                  departDate,
-                  returnDate,
-                  budget,
-                  selectedHotel,
-                })
-              }
-            ></Button>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() =>
+                  navigation.navigate("generate-excursions", {
+                    selectedOutboundFlight,
+                    selectedInboundFlight,
+                    outboundAirport,
+                    inboundAirport,
+                    departDate,
+                    returnDate,
+                    budget,
+                    selectedHotel,
+                  })
+                }
+              >
+                <TextReg style={styles.buttonText}>Confirm Hotel</TextReg>
+              </TouchableOpacity>
+            </View>
           )}
         </>
       )}
@@ -98,42 +128,90 @@ const GenerateHotels = ({ navigation, route }) => {
   );
 };
 
+export default GenerateHotels;
+
 const styles = StyleSheet.create({
+  flightContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 16,
+  },
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 8,
     backgroundColor: "#fff",
   },
+  flightInfoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  imageContainer: {
+    marginRight: 16,
+  },
+  image: {
+    width: 40,
+    height: 40,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  airlineText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  departureText: {
+    fontSize: 14,
+    color: "#888",
+  },
+  flightItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+    marginBottom: 16,
+    backgroundColor: "#f9f9f9",
+    borderRadius: 8,
+  },
+  selectedFlightItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+    marginBottom: 16,
+    backgroundColor: "#e0f7fa",
+    borderRadius: 8,
+  },
+  priceText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#007AFF",
+    marginRight: 16,
+  },
+  arrowImage: {
+    width: 20,
+    height: 20,
+  },
   loadingContainer: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
-    height: "90%",
+  },
+  buttonContainer: {
+    padding: 16,
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
   },
-  flightItem: {
-    padding: 16,
-    marginBottom: 16,
-    backgroundColor: "#f9f9f9",
-    borderRadius: 8,
-  },
-  flightText: {
-    fontSize: 16,
-  },
-  selectedFlightItem: {
-    padding: 16,
-    marginBottom: 16,
-    backgroundColor: "#e0f7fa",
-    borderRadius: 8,
-  },
-  selectedFlightText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
 });
-
-export default GenerateHotels;
