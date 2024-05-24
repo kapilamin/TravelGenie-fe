@@ -1,6 +1,7 @@
 import {
   StyleSheet,
   View,
+  ScrollView,
   TouchableOpacity,
   Button,
   Image,
@@ -26,163 +27,172 @@ const ConfirmBooking = ({ navigation, route }) => {
     selectedExcursions,
   } = route.params;
 
-  useEffect(() => {
-    console.log(selectedOutboundFlight);
-  }, []);
-  return (
-    <View style={styles.container}>
-      <TextReg style={styles.heading}>Your Holiday</TextReg>
-      <TextReg style={styles.subheading}>Hotel</TextReg>
-      <ImageBackground
-        source={{ uri: "https://picsum.photos/500/100" }}
-        style={styles.hotelCard}
-      >
-        <View style={styles.overlay}>
-          <TextBold style={styles.hotelName}>
-            {selectedHotel.hotel.name}
-          </TextBold>
-          <Image source={require("../../assets/stars.png")}></Image>
-        </View>
-      </ImageBackground>
-      <TextReg style={styles.subheading}>Flights</TextReg>
-      <View style={styles.flightRow}>
-        <View style={styles.flightCard}>
-          <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>
-              {cityToEmoji(outboundAirport)}
-            </TextReg>
-          </View>
-          <TextBold>{outboundAirport}</TextBold>
-          <TextReg>
-            {selectedOutboundFlight.itineraries[0].segments[0].departure.at
-              .split("T")[0]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-          <TextReg>
-            {selectedOutboundFlight.itineraries[0].segments[0].departure.at
-              .split("T")[1]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-        </View>
-        <Image
-          source={require("../../assets/arrow-right-dark.png")}
-          style={styles.arrow}
-        />
-      
-        <View style={styles.flightCard}>
-          <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
-          </View>
-          <TextBold>{inboundAirport}</TextBold>
-          <TextReg>
-            {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
-              .split("T")[0]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-          <TextReg>
-            {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
-              .split("T")[1]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-        </View>
-      </View>
-      <View style={styles.flightRow}>
-        <View style={styles.flightCard}>
-          <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
-          </View>
-          <TextBold>{inboundAirport}</TextBold>
-          <TextReg>
-            {selectedInboundFlight.itineraries[0].segments[0].departure.at
-              .split("T")[0]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-          <TextReg>
-            {selectedInboundFlight.itineraries[0].segments[0].departure.at
-              .split("T")[1]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-        </View>
-        <Image
-          source={require("../../assets/arrow-right-dark.png")}
-          style={styles.arrow}
-        />
-        <View style={styles.flightCard}>
-          <View style={styles.flagCard}>
-            <TextReg style={styles.flag}>
-              {cityToEmoji(outboundAirport)}
-            </TextReg>
-          </View>
-          <TextBold>{outboundAirport}</TextBold>
-          <TextReg>
-            {selectedInboundFlight.itineraries[0].segments[0].arrival.at
-              .split("T")[0]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-          <TextReg>
-            {selectedInboundFlight.itineraries[0].segments[0].arrival.at
-              .split("T")[1]
-              .split(":")
-              .splice(0, 2)
-              .join(":")}
-          </TextReg>
-        </View>
-      </View>
-      <View>
-        <TextBold style={styles.costText}>Cost</TextBold>
-        <View style={styles.costRow}>
-          <TextReg style={styles.costText}>Hotel</TextReg>
-          <TextReg style={styles.price}>
-            £{Number(selectedHotel.offers[0].price.total).toFixed(2)}
-          </TextReg>
-        </View>
-        <View style={styles.costRow}>
-          <TextReg style={styles.costText}>Outbound Flight</TextReg>
-          <TextReg style={styles.price}>
-            £{Number(selectedInboundFlight.price.grandTotal).toFixed(2)}
-          </TextReg>
-        </View>
-        <View style={styles.costRow}>
-          <TextReg style={styles.costText}>Inbound Flight</TextReg>
-          <TextReg style={styles.price}>
-            £{Number(selectedOutboundFlight.price.grandTotal).toFixed(2)}
-          </TextReg>
-        </View>
-        <View style={styles.costRow}>
-          <TextBold style={styles.costText}>Total</TextBold>
-          <TextReg style={styles.price}>
-            £
-            {(
-              Number(selectedHotel.offers[0].price.total) +
-              Number(selectedInboundFlight.price.grandTotal) +
-              Number(selectedOutboundFlight.price.grandTotal)
-            ).toFixed(2)}
-          </TextReg>
-        </View>
+  useEffect(() => {}, []);
 
-        <Pressable style={styles.button}>
-          <TextReg style={styles.buttonText}>Confirm Trip</TextReg>
-        </Pressable>
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <TextReg style={styles.heading}>Your Holiday</TextReg>
+        <TextReg style={styles.subheading}>Hotel</TextReg>
+        <ImageBackground
+          source={{ uri: "https://picsum.photos/500/100" }}
+          style={styles.hotelCard}
+        >
+          <View style={styles.overlay}>
+            <TextBold style={styles.hotelName}>
+              {selectedHotel.hotel.name}
+            </TextBold>
+            <Image source={require("../../assets/stars.png")}></Image>
+          </View>
+        </ImageBackground>
+        <TextReg style={styles.subheading}>Flights</TextReg>
+        <View style={styles.flightRow}>
+          <View style={styles.flightCard}>
+            <View style={styles.flagCard}>
+              <TextReg style={styles.flag}>
+                {cityToEmoji(outboundAirport)}
+              </TextReg>
+            </View>
+            <TextBold>{outboundAirport}</TextBold>
+            <TextReg>
+              {selectedOutboundFlight.itineraries[0].segments[0].departure.at
+                .split("T")[0]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+            <TextReg>
+              {selectedOutboundFlight.itineraries[0].segments[0].departure.at
+                .split("T")[1]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+          </View>
+          <Image
+            source={require("../../assets/arrow-right-dark.png")}
+            style={styles.arrow}
+          />
+          <View style={styles.flightCard}>
+            <View style={styles.flagCard}>
+              <TextReg style={styles.flag}>
+                {cityToEmoji(inboundAirport)}
+              </TextReg>
+            </View>
+            <TextBold>{inboundAirport}</TextBold>
+            <TextReg>
+              {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
+                .split("T")[0]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+            <TextReg>
+              {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
+                .split("T")[1]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+          </View>
+        </View>
+        <View style={styles.flightRow}>
+          <View style={styles.flightCard}>
+            <View style={styles.flagCard}>
+              <TextReg style={styles.flag}>
+                {cityToEmoji(inboundAirport)}
+              </TextReg>
+            </View>
+            <TextBold>{inboundAirport}</TextBold>
+            <TextReg>
+              {selectedInboundFlight.itineraries[0].segments[0].departure.at
+                .split("T")[0]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+            <TextReg>
+              {selectedInboundFlight.itineraries[0].segments[0].departure.at
+                .split("T")[1]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+          </View>
+          <Image
+            source={require("../../assets/arrow-right-dark.png")}
+            style={styles.arrow}
+          />
+          <View style={styles.flightCard}>
+            <View style={styles.flagCard}>
+              <TextReg style={styles.flag}>
+                {cityToEmoji(outboundAirport)}
+              </TextReg>
+            </View>
+            <TextBold>{outboundAirport}</TextBold>
+            <TextReg>
+              {selectedInboundFlight.itineraries[0].segments[0].arrival.at
+                .split("T")[0]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+            <TextReg>
+              {selectedInboundFlight.itineraries[0].segments[0].arrival.at
+                .split("T")[1]
+                .split(":")
+                .splice(0, 2)
+                .join(":")}
+            </TextReg>
+          </View>
+        </View>
+        <View>
+          <TextBold style={styles.costText}>Cost</TextBold>
+          <View style={styles.costRow}>
+            <TextReg style={styles.costText}>Hotel</TextReg>
+            <TextReg style={styles.price}>
+              £{Number(selectedHotel.offers[0].price.total).toFixed(2)}
+            </TextReg>
+          </View>
+          <View style={styles.costRow}>
+            <TextReg style={styles.costText}>Outbound Flight</TextReg>
+            <TextReg style={styles.price}>
+              £{Number(selectedInboundFlight.price.grandTotal).toFixed(2)}
+            </TextReg>
+          </View>
+          <View style={styles.costRow}>
+            <TextReg style={styles.costText}>Inbound Flight</TextReg>
+            <TextReg style={styles.price}>
+              £{Number(selectedOutboundFlight.price.grandTotal).toFixed(2)}
+            </TextReg>
+          </View>
+          <View style={styles.costRow}>
+            <TextBold style={styles.costText}>Total</TextBold>
+            <TextReg style={styles.price}>
+              £
+              {(
+                Number(selectedHotel.offers[0].price.total) +
+                Number(selectedInboundFlight.price.grandTotal) +
+                Number(selectedOutboundFlight.price.grandTotal)
+              ).toFixed(2)}
+            </TextReg>
+          </View>
+
+          <Pressable style={styles.button}>
+            <TextReg style={styles.buttonText}>Confirm Trip</TextReg>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -191,23 +201,20 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     flex: 1,
-    TextRegAlign: "center",
+    textAlign: "center",
     alignSelf: "center",
     alignItems: "center",
   },
   heading: {
     fontSize: 18,
-
     marginTop: 5,
     lineHeight: 40,
   },
   subheading: {
     width: "70%",
-
     lineHeight: 25,
     fontSize: 18,
     fontWeight: "bold",
-
     alignSelf: "flex-start",
     color: "black",
   },
@@ -224,11 +231,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
   },
-
   buttonTextReg: {
     color: "white",
     fontSize: 18,
-    TextRegAlign: "center",
+    textAlign: "center",
   },
   hotelCard: {
     width: "100%",
@@ -300,7 +306,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     textAlign: "center",
-
     padding: 15,
     width: "100%",
     height: 55,
