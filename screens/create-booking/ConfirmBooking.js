@@ -27,7 +27,7 @@ const ConfirmBooking = ({ navigation, route }) => {
   } = route.params;
 
   useEffect(() => {
-    console.log(selectedExcursions)
+    console.log(selectedOutboundFlight)
   }, []);
   return (
     <View style={styles.container}>

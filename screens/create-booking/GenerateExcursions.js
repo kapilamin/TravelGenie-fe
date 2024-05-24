@@ -30,11 +30,6 @@ const GenerateExcursions = ({ navigation, route }) => {
   } = route.params;
 
   useEffect(() => {
-    console.log(
-      selectedHotel.hotel.latitude,
-      selectedHotel.hotel.longitude,
-      10
-    );
     setIsLoading(true);
     getExcursions(
       selectedHotel.hotel.latitude,
