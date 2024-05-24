@@ -120,7 +120,8 @@ const GenerateHotels = ({ navigation, route }) => {
                     departDate,
                     returnDate,
                     budget,
-                    selectedHotel,
+                    selectedHotel
+                    
                   })
                 }
               >

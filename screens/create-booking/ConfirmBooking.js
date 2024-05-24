@@ -26,7 +26,9 @@ const ConfirmBooking = ({ navigation, route }) => {
     selectedExcursions,
   } = route.params;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(selectedExcursions)
+  }, []);
   return (
     <View style={styles.container}>
       <TextReg style={styles.heading}>Your Holiday</TextReg>
@@ -36,7 +38,10 @@ const ConfirmBooking = ({ navigation, route }) => {
         style={styles.hotelCard}
       >
         <View style={styles.overlay}>
-          <TextBold style={styles.hotelName}>Hotel name</TextBold>
+          <TextBold style={styles.hotelName}>
+            {selectedHotel.hotel.name}
+          </TextBold>
+          <Image source={require("../../assets/stars.png")}></Image>
         </View>
       </ImageBackground>
       <TextReg style={styles.subheading}>Flights</TextReg>
@@ -48,8 +53,20 @@ const ConfirmBooking = ({ navigation, route }) => {
             </TextReg>
           </View>
           <TextReg>{outboundAirport}</TextReg>
-          <TextReg>{outboundAirport}</TextReg>
-          <TextReg>23/05/24 11:00AM</TextReg>
+          <TextReg>
+            {selectedOutboundFlight.itineraries[0].segments[0].departure.at
+              .split("T")[0]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
+          <TextReg>
+            {selectedOutboundFlight.itineraries[0].segments[0].departure.at
+              .split("T")[1]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
         </View>
         <Image
           source={require("../../assets/arrow-right-dark.png")}
@@ -60,8 +77,20 @@ const ConfirmBooking = ({ navigation, route }) => {
             <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
           </View>
           <TextReg>{inboundAirport}</TextReg>
-          <TextReg>{inboundAirport}</TextReg>
-          <TextReg>23/05/24 11:00AM</TextReg>
+          <TextReg>
+            {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
+              .split("T")[0]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
+          <TextReg>
+            {selectedOutboundFlight.itineraries[0].segments[0].arrival.at
+              .split("T")[1]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
         </View>
       </View>
       <View style={styles.flightRow}>
@@ -70,8 +99,20 @@ const ConfirmBooking = ({ navigation, route }) => {
             <TextReg style={styles.flag}>{cityToEmoji(inboundAirport)}</TextReg>
           </View>
           <TextReg>{inboundAirport}</TextReg>
-          <TextReg>{inboundAirport}</TextReg>
-          <TextReg>23/05/24 11:00AM</TextReg>
+          <TextReg>
+            {selectedInboundFlight.itineraries[0].segments[0].departure.at
+              .split("T")[0]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
+          <TextReg>
+            {selectedInboundFlight.itineraries[0].segments[0].departure.at
+              .split("T")[1]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
         </View>
         <Image
           source={require("../../assets/arrow-right-dark.png")}
@@ -84,27 +125,49 @@ const ConfirmBooking = ({ navigation, route }) => {
             </TextReg>
           </View>
           <TextReg>{outboundAirport}</TextReg>
-          <TextReg>{outboundAirport}</TextReg>
-          <TextReg>23/05/24 11:00AM</TextReg>
+          <TextReg>
+            {selectedInboundFlight.itineraries[0].segments[0].arrival.at
+              .split("T")[0]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
+          <TextReg>
+            {selectedInboundFlight.itineraries[0].segments[0].arrival.at
+              .split("T")[1]
+              .split(":")
+              .splice(0, 2)
+              .join(":")}
+          </TextReg>
         </View>
       </View>
       <View>
         <TextBold style={styles.costText}>Cost</TextBold>
         <View style={styles.costRow}>
           <TextReg style={styles.costText}>Hotel (5 Night)</TextReg>
-          <TextReg style={styles.price}>£750</TextReg>
+          <TextReg style={styles.price}>
+            {selectedHotel.offers[0].price.total}
+          </TextReg>
         </View>
         <View style={styles.costRow}>
-          <TextReg style={styles.costText}>Flights</TextReg>
-          <TextReg style={styles.price}>£750</TextReg>
+          <TextReg style={styles.costText}>Outbound Flight</TextReg>
+          <TextReg style={styles.price}>
+            {Number(selectedInboundFlight.price.grandTotal)}
+          </TextReg>
         </View>
         <View style={styles.costRow}>
-          <TextReg style={styles.costText}>Excursions</TextReg>
-          <TextReg style={styles.price}>£750</TextReg>
+          <TextReg style={styles.costText}>Inbound Flight</TextReg>
+          <TextReg style={styles.price}>
+            {Number(selectedOutboundFlight.price.grandTotal)}
+          </TextReg>
         </View>
         <View style={styles.costRow}>
           <TextBold style={styles.costText}>Total</TextBold>
-          <TextReg style={styles.price}>£750</TextReg>
+          <TextReg style={styles.price}>
+            {Number(selectedHotel.offers[0].price.total) +
+              Number(selectedInboundFlight.price.grandTotal) +
+              Number(selectedOutboundFlight.price.grandTotal)}
+          </TextReg>
         </View>
 
         <Pressable style={styles.button}>
@@ -176,13 +239,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
+    padding: 15,
   },
   hotelName: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-    marginRight: "70%",
+    
   },
   flightRow: {
     flexDirection: "row",

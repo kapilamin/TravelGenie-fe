@@ -118,6 +118,7 @@ const GenerateExcursions = ({ navigation, route }) => {
                     departDate,
                     returnDate,
                     budget,
+                    selectedHotel,
                     selectedExcursions,
                   })
                 }
