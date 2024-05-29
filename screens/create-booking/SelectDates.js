@@ -100,12 +100,13 @@ export default SelectDates;
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    justifyContent: "center",
+
     alignItems: "center",
     padding: 20,
     backgroundColor: "white",
   },
   container: {
+    marginTop: 50,
     width: "95%",
     justifyContent: "center",
     alignItems: "center",

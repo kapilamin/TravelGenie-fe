@@ -1,3 +1,4 @@
+import axios from "axios";
 import amadeusClient from "./amadeusClient";
 
 const getExcursions = async (latitude, longitude, radius = 1) => {
@@ -25,7 +26,7 @@ const getFlights = async (
   destinationLocationCode,
   departureDate,
   adults = 1,
-  max = 3
+  max = 10
 ) => {
   try {
     const response = await amadeusClient.get("/v2/shopping/flight-offers", {
@@ -108,10 +109,56 @@ const getHotelsAndDeals = async (cityCode, checkInDate, checkOutDate) => {
   }
 };
 
+const postBooking = async (newBooking) => {
+  try {
+    const response = await axios.post(
+      "https://travelgenie-be.onrender.com/api/bookings",
+      newBooking,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const fetchBookings = async () => {
+  const response = await axios.get(
+    "https://travelgenie-be.onrender.com/api/bookings"
+  );
+
+  return response.data;
+};
+
+const postUser = async (newUser) => {
+  try {
+    const response = await axios.post(
+      "https://travelgenie-be.onrender.com/api/users",
+      newUser,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Response:", response.data);
+    return response.data;
+  } catch (err) {
+    console.error("Error:", err.response ? err.response.data : err.message);
+    throw err;
+  }
+};
+
 export {
   getExcursions,
   getFlights,
   getHotelOffers,
   getHotelsByCity,
   getHotelsAndDeals,
+  postBooking,
+  fetchBookings,
+  postUser,
 };

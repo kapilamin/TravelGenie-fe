@@ -25,10 +25,7 @@ const SelectBudget = ({ navigation, route }) => {
             Enter your total budget:
           </TextReg>
           <View style={styles.inputContainer}>
-            <Image
-              source={require("../../assets/pin.png")}
-              style={styles.image}
-            />
+            <Text>£{"  "}</Text>
             <TextInput
               style={styles.input}
               placeholderTextColor="#B0B0B0"
@@ -61,13 +58,13 @@ export default SelectBudget;
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     padding: 20,
     backgroundColor: "white",
   },
   container: {
     width: "95%",
+    marginTop: 50,
     justifyContent: "center",
     alignItems: "center",
   },

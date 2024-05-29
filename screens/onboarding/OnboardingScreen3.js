@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, Button, Image, Pressable } from "react-native";
+import { CommonActions } from "@react-navigation/native";
 import React from "react";
 
 const OnboardingScreen1 = ({ navigation }) => {
@@ -19,7 +20,14 @@ const OnboardingScreen1 = ({ navigation }) => {
           },
           styles.button,
         ]}
-        onPress={() => navigation.navigate("login")}
+        onPress={() =>
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: "select-city" }],
+            })
+          )
+        }
       >
         <Image
           source={require("../../assets/arrow-right.png")}

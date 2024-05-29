@@ -13,6 +13,7 @@ import { getFlights } from "../../api/api";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
 import { codeToAirline } from "../../utils/airlineCodes";
+import LottieView from "lottie-react-native";
 
 const GenerateInboundFlights = ({ navigation, route }) => {
   const [flights, setFlights] = useState([]);
@@ -68,7 +69,7 @@ const GenerateInboundFlights = ({ navigation, route }) => {
               {codeToAirline(item.itineraries[0].segments[0].carrierCode) +
                 " " +
                 item.itineraries[0].segments[0].carrierCode +
-                item.itineraries[0].segments[0].aircraft.code}
+                item.itineraries[0].segments[0].number}
             </Text>
             <Text style={styles.departureText}>
               Departs{" "}
@@ -80,7 +81,9 @@ const GenerateInboundFlights = ({ navigation, route }) => {
             </Text>
           </View>
         </View>
-        <Text style={styles.priceText}>£{item.price.total.split(".")[0]}</Text>
+        <Text style={styles.priceText}>
+          £ {Number(Number(item.price.total.split(".")[0]))}
+        </Text>
         <Image
           source={require("../../assets/info.png")}
           style={styles.arrowImage}
@@ -94,7 +97,12 @@ const GenerateInboundFlights = ({ navigation, route }) => {
       <TextBold style={styles.title}>Select Inbound Flight</TextBold>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007AFF" />
+          <LottieView
+            source={require("../../assets/plane-loader.json")}
+            autoPlay
+            loop
+            style={styles.lottieView}
+          />
         </View>
       ) : (
         <>
@@ -213,5 +221,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    marginTop: 50,
+    alignSelf: "center",
+  },
+  lottieView: {
+    width: 200,
+    height: 200,
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });

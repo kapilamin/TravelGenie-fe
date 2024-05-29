@@ -1,3 +1,4 @@
+// screens/create-booking/SelectCity.js
 import React from "react";
 import {
   StyleSheet,
@@ -5,25 +6,26 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Image,
 } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
 import { cityToEmoji } from "../../utils/cityToFlag";
+import { AuthContext } from "../../context/AuthContext";
 
 const SelectCity = ({ navigation }) => {
   const [outboundAirport, setOutboundAirport] = useState("");
   const [inboundAirport, setInboundAirport] = useState("");
+  const { user } = useContext(AuthContext);
 
   return (
     <View style={styles.outerContainer}>
       <View style={styles.container}>
+        <Text>Welcome, {user.username}</Text>
         <TextBold style={styles.title}>Where do you want to go?</TextBold>
         <TextReg style={styles.inputHeading}>Flying from:</TextReg>
         <View style={styles.inputContainer}>
           <Text>{cityToEmoji(outboundAirport)} </Text>
-
           <TextInput
             style={styles.input}
             placeholderTextColor="#B0B0B0"
@@ -62,7 +64,6 @@ export default SelectCity;
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     padding: 20,
     backgroundColor: "white",
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     width: "95%",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 500,
+    marginTop: 50,
   },
   title: {
     fontSize: 28,
@@ -81,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-
     borderRadius: 25,
     borderWidth: 1,
     borderColor: "#E0E0E0",

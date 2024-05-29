@@ -13,6 +13,7 @@ import { getHotelsAndDeals } from "../../api/api";
 import { cityToCode, codeToCity } from "../../utils/iataAirportCodes";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
+import LottieView from "lottie-react-native";
 
 const GenerateHotels = ({ navigation, route }) => {
   const [hotels, setHotels] = useState([]);
@@ -78,8 +79,7 @@ const GenerateHotels = ({ navigation, route }) => {
           </View>
         </View>
         <Text style={styles.priceText}>
-          {item.offers[0].price.total.split(".")[0]}
-          {item.offers[0].price.currency}
+          £{item.offers[0].price.total.split(".")[0]}
         </Text>
         <Pressable
           onPress={() => navigation.navigate("hotelDetails", { hotel: item })}
@@ -98,7 +98,12 @@ const GenerateHotels = ({ navigation, route }) => {
       <TextBold style={styles.title}>Select Hotel</TextBold>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007AFF" />
+          <LottieView
+            source={require("../../assets/plane-loader.json")}
+            autoPlay
+            loop
+            style={styles.lottieView}
+          />
         </View>
       ) : (
         <>
@@ -120,8 +125,7 @@ const GenerateHotels = ({ navigation, route }) => {
                     departDate,
                     returnDate,
                     budget,
-                    selectedHotel
-                    
+                    selectedHotel,
                   })
                 }
               >
@@ -220,5 +224,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    marginTop: 50,
+    alignSelf: "center",
+  },
+  lottieView: {
+    width: 200,
+    height: 200,
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });

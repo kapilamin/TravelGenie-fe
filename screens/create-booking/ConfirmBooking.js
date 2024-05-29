@@ -1,20 +1,21 @@
+import React, { useContext } from "react";
 import {
   StyleSheet,
   View,
   ScrollView,
-  TouchableOpacity,
-  Button,
+  Pressable,
   Image,
   ImageBackground,
-  Pressable,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
-import { codeToCity } from "../../utils/iataAirportCodes";
 import { cityToEmoji } from "../../utils/cityToFlag";
+import { BookingContext } from "../../context/BookingContext";
+import { postBooking } from "../../api/api";
 
 const ConfirmBooking = ({ navigation, route }) => {
+  const { addBooking } = useContext(BookingContext);
+
   const {
     selectedOutboundFlight,
     selectedInboundFlight,
@@ -27,7 +28,30 @@ const ConfirmBooking = ({ navigation, route }) => {
     selectedExcursions,
   } = route.params;
 
-  useEffect(() => {}, []);
+  const grandTotal = (
+    Number(selectedHotel.offers[0].price.total) +
+    Number(selectedInboundFlight.price.grandTotal) +
+    Number(selectedOutboundFlight.price.grandTotal)
+  ).toFixed(2);
+  const confirmTrip = () => {
+    const filteredExcursions = selectedExcursions.map((excursion) => {
+      return excursion.name;
+    });
+
+    console.log(filteredExcursions);
+    const newBooking = {
+      selectedOutboundFlight: outboundAirport,
+      selectedInboundFlight: inboundAirport,
+      departDate,
+      returnDate,
+      selectedHotel: selectedHotel.hotel.name,
+      selectedExcursions: filteredExcursions,
+    };
+
+    addBooking(newBooking);
+    postBooking(newBooking);
+    navigation.navigate("Existing Bookings");
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -168,17 +192,24 @@ const ConfirmBooking = ({ navigation, route }) => {
           </View>
           <View style={styles.costRow}>
             <TextBold style={styles.costText}>Total</TextBold>
-            <TextReg style={styles.price}>
-              £
-              {(
-                Number(selectedHotel.offers[0].price.total) +
-                Number(selectedInboundFlight.price.grandTotal) +
-                Number(selectedOutboundFlight.price.grandTotal)
-              ).toFixed(2)}
+            <TextBold style={styles.price}>£{grandTotal}</TextBold>
+          </View>
+          <View style={styles.costRow}>
+            <TextReg style={styles.costText}>
+              {Number(budget) >= grandTotal ? "Under Budget" : "Over Budget"}
             </TextReg>
+            <TextBold
+              style={
+                Number(budget) >= grandTotal
+                  ? styles.budgetGreen
+                  : styles.budgetRed
+              }
+            >
+              £{Math.abs(Number(budget - grandTotal).toFixed(2))}
+            </TextBold>
           </View>
 
-          <Pressable style={styles.button}>
+          <Pressable style={styles.button} onPress={confirmTrip}>
             <TextReg style={styles.buttonText}>Confirm Trip</TextReg>
           </Pressable>
         </View>
@@ -192,6 +223,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 50,
   },
   title: {
     fontSize: 24,
@@ -300,6 +332,14 @@ const styles = StyleSheet.create({
     color: "#0373F3",
     fontSize: 18,
   },
+  budgetGreen: {
+    color: "#549F93",
+    fontSize: 18,
+  },
+  budgetRed: {
+    color: "#E63946",
+    fontSize: 18,
+  },
   costText: {
     fontSize: 18,
   },
@@ -315,6 +355,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#0373F3",
     borderRadius: 50,
+    marginBottom: 75,
   },
 });
 

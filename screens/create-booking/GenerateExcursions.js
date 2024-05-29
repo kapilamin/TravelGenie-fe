@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { getExcursions } from "../../api/api";
 import TextReg from "../TextReg";
 import TextBold from "../TextBold";
-
+import LottieView from "lottie-react-native";
 const GenerateExcursions = ({ navigation, route }) => {
   const [excursions, setExcursions] = useState([]);
   const [selectedExcursions, setSelectedExcursions] = useState([]);
@@ -91,7 +91,12 @@ const GenerateExcursions = ({ navigation, route }) => {
       <TextBold style={styles.title}>Select Excursions</TextBold>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007AFF" />
+          <LottieView
+            source={require("../../assets/plane-loader.json")}
+            autoPlay
+            loop
+            style={styles.lottieView}
+          />
         </View>
       ) : (
         <>
@@ -206,8 +211,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   title: {
+    marginTop: 50,
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+
+    alignSelf: "center",
+  },
+  lottieView: {
+    width: 200,
+    height: 200,
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });

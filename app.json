@@ -2,6 +2,8 @@
   "expo": {
     "name": "test-travel-genie",
     "slug": "test-travel-genie",
+    "scheme": "exp",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,7 +14,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "packaged": "com"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,8 +26,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font"
-    ]
+    "plugins": ["expo-font"]
   }
 }

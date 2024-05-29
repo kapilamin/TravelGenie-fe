@@ -28,7 +28,7 @@ airlineCodes = {
   KL: "KLM Royal Dutch Airlines",
   LA: "LATAM Airlines",
   LH: "Lufthansa",
-  LO: "LOT Polish Airlines",
+  LO: "Polish Airlines",
   LX: "Swiss International Air Lines",
   LY: "El Al Israel Airlines",
   MH: "Malaysia Airlines",
