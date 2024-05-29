@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Button,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
@@ -37,7 +35,6 @@ const BookingInfo = () => {
         ...prevDocs,
         { type: selectedType, ...result },
       ]);
-      console.log(result); // Log the result for debugging
     } catch (err) {
       console.error("Error picking document:", err);
     }
@@ -80,13 +77,12 @@ const BookingInfo = () => {
 };
 
 const styles = StyleSheet.create({
-  pickerContainer: {
-    flex: 1,
-    padding: 16,
-    justifyContent: "flex-start",
+  picker: {
+    marginBottom: 30,
   },
   documentList: {
-    height: "66%",
+    height: "55%",
+    marginTop: 60,
   },
   documentItem: {
     flexDirection: "row",
@@ -95,7 +91,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "gainsboro",
   },
-
   documentType: {
     fontSize: 16,
   },

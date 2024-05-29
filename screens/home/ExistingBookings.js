@@ -1,10 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Pressable,
+  Image,
+} from "react-native";
 import { BookingContext } from "../../context/BookingContext";
 import LottieView from "lottie-react-native";
 import { fetchBookings } from "../../api/api";
+import TextBold from "../TextBold";
+import TextReg from "../TextReg";
 
-const ExistingBookings = ({navigation, route}) => {
+const ExistingBookings = ({ navigation, route }) => {
   const { bookings } = useContext(BookingContext);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isLoadingBookings, setIsLoadingBookings] = useState(true);
@@ -30,27 +39,39 @@ const ExistingBookings = ({navigation, route}) => {
   }, [bookings]);
 
   const renderBooking = ({ item }) => (
-    <Pressable onPress={() => {
-      navigation.navigate('BookingInfo', {item})
-    }}>
+    <Pressable
+      onPress={() => {
+        navigation.navigate("BookingInfo", { item });
+      }}
+    >
       <View style={styles.bookingCard}>
-        <Text style={styles.bookingText}>
-          {item.selectedOutboundFlight} to {item.selectedInboundFlight}
-        </Text>
-        <Text style={styles.bookingText}>
-          Depart: {item.departDate.split("T")[0]}
-        </Text>
-        <Text style={styles.bookingText}>
-          Return: {item.returnDate.split("T")[0]}
-        </Text>
-        <Text style={styles.bookingText}>Hotel: {item.selectedHotel}</Text>
+        <View style={styles.bookingContainer}>
+          <TextBold style={styles.bookingText}>
+            {item.selectedOutboundFlight} to {item.selectedInboundFlight}
+          </TextBold>
+          <TextReg style={styles.bookingText}>
+            Depart: {item.departDate.split("T")[0]}
+          </TextReg>
+          <TextReg style={styles.bookingText}>
+            Return: {item.returnDate.split("T")[0]}
+          </TextReg>
+          <TextReg style={styles.bookingText}>
+            Hotel: {item.selectedHotel}
+          </TextReg>
+        </View>
+        <View style={styles.image}>
+          <Image
+            source={require("../../assets/boarding-pass-icon.png")}
+            style={styles.boardingPassIcon}
+          />
+        </View>
       </View>
     </Pressable>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Existing Bookings</Text>
+      <TextBold style={styles.header}>Existing Bookings</TextBold>
       <FlatList
         data={fetchedBookings}
         renderItem={renderBooking}
@@ -77,15 +98,16 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     marginBottom: 20,
-    marginTop: 50,
+    marginTop: 70,
   },
   bookingCard: {
-    padding: 15,
+    padding: 20,
     marginVertical: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    width: "90%",
+    marginRight: 60,
+    borderRadius: 20,
+    flexDirection: "row",
+    width: "95%",
+    backgroundColor: "#f9f9f9",
   },
   bookingText: {
     fontSize: 16,
@@ -93,8 +115,20 @@ const styles = StyleSheet.create({
   },
   lottieView: {
     position: "absolute",
-    width: 600,
+    width: 800,
     height: 1400,
+  },
+  boardingPassIcon: {
+    width: 50,
+    height: 50,
+  },
+  image: {
+    alignSelf: "center",
+
+  },
+  bookingContainer: {
+    marginTop: 15,
+    width: "75%",
   },
 });
 

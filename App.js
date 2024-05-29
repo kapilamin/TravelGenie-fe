@@ -34,7 +34,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BookingProvider>
-        <NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
           <HomeStack />
         </NavigationContainer>
       </BookingProvider>

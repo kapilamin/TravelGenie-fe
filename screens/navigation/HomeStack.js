@@ -47,9 +47,21 @@ const HomeStack = () => {
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="ConfirmBooking" component={ConfirmBooking} />
-      <Stack.Screen name="BookingInfo" component={BookingInfo} />
-      <Stack.Screen name="DocumentViewer" component={DocumentViewer} />
+      <Stack.Screen
+        name="ConfirmBooking"
+        component={ConfirmBooking}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="BookingInfo"
+        component={BookingInfo}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DocumentViewer"
+        component={DocumentViewer}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
