@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import { BookingContext } from "../../context/BookingContext";
 import LottieView from "lottie-react-native";
 import { fetchBookings } from "../../api/api";
 
-const ExistingBookings = () => {
+const ExistingBookings = ({navigation, route}) => {
   const { bookings } = useContext(BookingContext);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isLoadingBookings, setIsLoadingBookings] = useState(true);
@@ -30,18 +30,22 @@ const ExistingBookings = () => {
   }, [bookings]);
 
   const renderBooking = ({ item }) => (
-    <View style={styles.bookingCard}>
-      <Text style={styles.bookingText}>
-        {item.selectedOutboundFlight} to {item.selectedInboundFlight}
-      </Text>
-      <Text style={styles.bookingText}>
-        Depart: {item.departDate.split("T")[0]}
-      </Text>
-      <Text style={styles.bookingText}>
-        Return: {item.returnDate.split("T")[0]}
-      </Text>
-      <Text style={styles.bookingText}>Hotel: {item.selectedHotel}</Text>
-    </View>
+    <Pressable onPress={() => {
+      navigation.navigate('BookingInfo', {item})
+    }}>
+      <View style={styles.bookingCard}>
+        <Text style={styles.bookingText}>
+          {item.selectedOutboundFlight} to {item.selectedInboundFlight}
+        </Text>
+        <Text style={styles.bookingText}>
+          Depart: {item.departDate.split("T")[0]}
+        </Text>
+        <Text style={styles.bookingText}>
+          Return: {item.returnDate.split("T")[0]}
+        </Text>
+        <Text style={styles.bookingText}>Hotel: {item.selectedHotel}</Text>
+      </View>
+    </Pressable>
   );
 
   return (

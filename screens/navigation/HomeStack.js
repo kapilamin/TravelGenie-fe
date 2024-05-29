@@ -8,6 +8,7 @@ import ConfirmBooking from "../create-booking/ConfirmBooking";
 
 import Profile from "../home/Profile";
 import Login from "../auth/Login";
+import BookingInfo from "../existing-booking/BookingInfo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -43,7 +44,14 @@ const HomeStack = () => {
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="ConfirmBooking" component={ConfirmBooking} />
+      <Stack.Screen
+        name="ConfirmBooking"
+        component={ConfirmBooking}
+      />
+      <Stack.Screen
+        name="BookingInfo"
+        component={BookingInfo}
+      />
     </Stack.Navigator>
   );
 };
