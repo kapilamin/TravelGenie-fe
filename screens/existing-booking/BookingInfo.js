@@ -1,10 +1,30 @@
 import React, { useState } from "react";
-import { View, Button, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import * as DocumentPicker from "expo-document-picker";
-import { WebView } from "react-native-webview";
+import { useNavigation } from "@react-navigation/native";
+import { Picker } from "@react-native-picker/picker";
+import TextReg from "../TextReg";
+import TextBold from "../TextBold";
+
+const documentTypes = [
+  "Boarding Pass",
+  "Hotel Reservation",
+  "Passport",
+  "Visa",
+  "Excursion Ticket",
+];
 
 const BookingInfo = () => {
-  const [fileResponse, setFileResponse] = useState(null);
+  const [selectedType, setSelectedType] = useState(documentTypes[0]);
+  const [documents, setDocuments] = useState([]);
+  const navigation = useNavigation();
 
   const handleDocumentPick = async () => {
     try {
@@ -12,40 +32,90 @@ const BookingInfo = () => {
         type: "*/*",
         copyToCacheDirectory: true,
       });
-        setFileResponse(result);
-        console.log(fileResponse);
+
+      setDocuments((prevDocs) => [
+        ...prevDocs,
+        { type: selectedType, ...result },
+      ]);
+      console.log(result); // Log the result for debugging
     } catch (err) {
       console.error("Error picking document:", err);
     }
   };
 
-
+  const renderDocumentItem = ({ item }) => (
+    <View style={styles.documentItem}>
+      <TextBold style={styles.documentType}>{item.type}</TextBold>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("DocumentViewer", { uri: item.uri })}
+      >
+        <TextReg style={styles.openButton}>Open</TextReg>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Pick Document"
-        onPress={handleDocumentPick}
+      <FlatList
+        data={documents}
+        renderItem={renderDocumentItem}
+        keyExtractor={(item, index) => index.toString()}
+        style={styles.documentList}
       />
-      {fileResponse && (
-        <View style={styles.responseContainer}>
-          <Text>File Name: {fileResponse.assets[0].name}</Text>
-          <Text>File Size: {fileResponse.size}</Text>
-          <Text>File URI: {fileResponse.uri}</Text>
-        </View>
-      )}
+
+      <Picker
+        selectedValue={selectedType}
+        style={styles.picker}
+        onValueChange={(itemValue) => setSelectedType(itemValue)}
+      >
+        {documentTypes.map((type) => (
+          <Picker.Item key={type} label={type} value={type} />
+        ))}
+      </Picker>
+      <TouchableOpacity style={styles.button} onPress={handleDocumentPick}>
+        <TextReg style={styles.buttonText}>Pick Document</TextReg>
+      </TouchableOpacity>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
-  container: {
+  pickerContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     padding: 16,
+    justifyContent: "flex-start",
   },
-  responseContainer: {
-    marginTop: 20,
+  documentList: {
+    height: "66%",
+  },
+  documentItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "gainsboro",
+  },
+
+  documentType: {
+    fontSize: 16,
+  },
+  openButton: {
+    color: "#007AFF",
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: "center",
+    padding: 20,
+    width: "80%",
+    alignSelf: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
   },
 });
+
 export default BookingInfo;
