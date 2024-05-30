@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import OnboardingScreen1 from "../onboarding/OnboardingScreen1";
 import OnboardingScreen2 from "../onboarding/OnboardingScreen2";
 import OnboardingScreen3 from "../onboarding/OnboardingScreen3";
-import Login from "../auth/Login";
+import SignUp from "../auth/SignUp";
 import SelectCity from "../create-booking/SelectCity";
 import SelectDates from "../create-booking/SelectDates";
 import SelectBudget from "../create-booking/SelectBudget";
@@ -13,12 +13,18 @@ import GenerateInboundFlights from "../create-booking/GenerateInboundFlights";
 import GenerateHotels from "../create-booking/GenerateHotels";
 import GenerateExcursions from "../create-booking/GenerateExcursions";
 import ConfirmBooking from "../create-booking/ConfirmBooking";
+import Login from "../auth/Login";
 
 const Stack = createNativeStackNavigator();
 
 const BookingStack = () => {
   return (
     <Stack.Navigator initialRouteName="login">
+      <Stack.Screen
+        name="login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="onboarding1"
         component={OnboardingScreen1}
@@ -35,8 +41,8 @@ const BookingStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="login"
-        component={Login}
+        name="SignUp"
+        component={SignUp}
         options={{ headerShown: false }}
       />
       <Stack.Screen

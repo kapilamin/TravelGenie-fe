@@ -8,7 +8,6 @@ import ExistingBookings from "../home/ExistingBookings";
 import ConfirmBooking from "../create-booking/ConfirmBooking";
 import { AuthContext } from "../../context/AuthContext";
 import Profile from "../home/Profile";
-import Login from "../auth/Login";
 import BookingInfo from "../existing-booking/BookingInfo";
 import DocumentViewer from "../existing-booking/DocumentViewer";
 import generateIcon from "../../assets/generateIcon.png";
@@ -74,11 +73,6 @@ const HomeStack = () => {
       <Stack.Screen
         name="Home"
         component={TabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ConfirmBooking"
-        component={ConfirmBooking}
         options={{ headerShown: false }}
       />
       <Stack.Screen
