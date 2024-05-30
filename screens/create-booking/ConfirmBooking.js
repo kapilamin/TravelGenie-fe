@@ -38,7 +38,6 @@ const ConfirmBooking = ({ navigation, route }) => {
       return excursion.name;
     });
 
-    console.log(filteredExcursions);
     const newBooking = {
       selectedOutboundFlight: outboundAirport,
       selectedInboundFlight: inboundAirport,

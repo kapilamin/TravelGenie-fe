@@ -19,11 +19,7 @@ const ExistingBookings = ({ navigation, route }) => {
   const [isLoadingBookings, setIsLoadingBookings] = useState(true);
   const [fetchedBookings, setFetchedBookings] = useState([]);
   useEffect(() => {
-    fetchBookings().then((res) => {
-      setFetchedBookings(res);
-    });
-
-    setIsLoadingBookings(false);
+    setFetchedBookings(bookings);
   }, [bookings]);
 
   useEffect(() => {
@@ -59,6 +55,7 @@ const ExistingBookings = ({ navigation, route }) => {
             Hotel: {item.selectedHotel}
           </TextReg>
         </View>
+        <View style={styles.cardLine}></View>
         <View style={styles.image}>
           <Image
             source={require("../../assets/boarding-pass-icon.png")}
@@ -103,11 +100,12 @@ const styles = StyleSheet.create({
   bookingCard: {
     padding: 20,
     marginVertical: 10,
-    marginRight: 60,
     borderRadius: 20,
     flexDirection: "row",
     width: "95%",
     backgroundColor: "#f9f9f9",
+    borderColor: "#007AFF",
+    borderWidth: 1,
   },
   bookingText: {
     fontSize: 16,
@@ -124,11 +122,17 @@ const styles = StyleSheet.create({
   },
   image: {
     alignSelf: "center",
-
   },
   bookingContainer: {
     marginTop: 15,
     width: "75%",
+  },
+  cardLine: {
+    height: "auto",
+    borderColor: "#007AFF",
+    borderWidth: 1,
+    borderStyle: "dashed",
+    marginRight: 20,
   },
 });
 

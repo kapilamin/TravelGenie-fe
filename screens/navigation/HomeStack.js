@@ -43,7 +43,7 @@ const TabNavigator = () => {
             />
           );
         },
-        tabBarActiveTintColor: "#007AFF", // Change this to your desired color
+        tabBarActiveTintColor: "#007AFF",
         tabBarInactiveTintColor: "gray",
       })}
     >

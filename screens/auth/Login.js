@@ -1,5 +1,12 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, TextInput, View, Button, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  Pressable,
+} from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../context/AuthContext"; // Make sure to create and import AuthContext
@@ -18,22 +25,12 @@ const Login = ({ navigation }) => {
 
   const handleLogin = async () => {
     setIsPostingUser(true);
-    const newUser = { username, email, password };
+    const newUser = { username, password };
     try {
-      if (newUser.username === "U") {
-        showAlert(setIsPostingUser);
-        setUsername("");
-      } else {
-        // const user = await postUser(newUser);
-        // await AsyncStorage.setItem("user", JSON.stringify(user));
-        // setUser(user);
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "My Bookings" }],
-          })
-        );
-      }
+      setTimeout(async () => {
+        await AsyncStorage.setItem("user", JSON.stringify(newUser));
+        setUser(newUser);
+      }, 2500);
     } catch (error) {
       setIsPostingUser(false);
       console.error("Error during Login:", error);
@@ -41,33 +38,40 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextBold style={styles.title}>Login</TextBold>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button
-        title="Login"
-        onPress={handleLogin}
-        disabled={isPostingUser}
-      />
-      <View style={styles.inline}>
-        <TextReg style={styles.text}>New to TravelGenie? </TextReg>
-        <Pressable onPress={() => {
-            navigation.navigate('SignUp')
-        }}>
-          <TextReg style={styles.signUp}>Sign up here</TextReg>
-        </Pressable>
+    <View style={styles.outerContainer}>
+      <View style={styles.container}>
+        <TextBold style={styles.title}>Login</TextBold>
+        <TextReg style={styles.inputHeading}>Username:</TextReg>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            editable={!isPostingUser}
+          />
+        </View>
+
+        <TextReg style={styles.inputHeading}>Password:</TextReg>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+            editable={!isPostingUser}
+          />
+        </View>
+        <Button title="Login" onPress={handleLogin} disabled={isPostingUser} />
+        <View style={styles.inline}>
+          <TextReg style={styles.text}>New to TravelGenie? </TextReg>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("SignUp");
+            }}
+          >
+            <TextReg style={styles.signUp}>Sign up here</TextReg>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -76,24 +80,60 @@ const Login = ({ navigation }) => {
 export default Login;
 
 const styles = StyleSheet.create({
-  container: {
+  outerContainer: {
     flex: 1,
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "white",
+  },
+  container: {
+    width: "95%",
     justifyContent: "center",
-    padding: 16,
+    alignItems: "center",
+    marginTop: 50,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: "center",
+    fontSize: 28,
+    marginBottom: 20,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    marginVertical: 10,
+    paddingHorizontal: 20,
+  },
+  image: {
+    width: 27,
+    height: 27,
+    marginRight: 10,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+    flex: 1,
+    height: 50,
+    fontSize: 16,
+    fontFamily: "Poppins",
+  },
+  button: {
+    position: "absolute",
+    bottom: 20,
+    width: "90%",
+    height: 50,
+    backgroundColor: "#007AFF",
     borderRadius: 25,
-    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+  },
+  inputHeading: {
+    color: "rgba(0, 0, 0, 0.3)",
+    alignSelf: "flex-start",
   },
   inline: {
     flexDirection: "row",

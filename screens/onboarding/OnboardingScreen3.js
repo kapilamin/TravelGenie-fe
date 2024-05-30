@@ -24,7 +24,7 @@ const OnboardingScreen1 = ({ navigation }) => {
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
-              routes: [{ name: "select-city" }],
+              routes: [{ name: "login" }],
             })
           )
         }

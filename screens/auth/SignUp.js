@@ -6,7 +6,8 @@ import { AuthContext } from "../../context/AuthContext"; // Make sure to create 
 import { postUser } from "../../api/api";
 import { CommonActions } from "@react-navigation/native";
 import showAlert from "../../utils/checkUserTaken";
-
+import TextBold from "../TextBold";
+import TextReg from "../TextReg";
 
 const SignUp = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -19,20 +20,15 @@ const SignUp = ({ navigation }) => {
     setIsPostingUser(true);
     const newUser = { username, email, password };
     try {
-      if (newUser.username === "U") {
-        showAlert(setIsPostingUser)
-        setUsername('')
-        
+      setIsPostingUser(true);
+      if (newUser.username === "Username") {
+        showAlert(setUsername, setIsPostingUser);
       } else {
-        const user = await postUser(newUser);
-        await AsyncStorage.setItem("user", JSON.stringify(user));
-        setUser(user);
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "onboarding1" }],
-          })
-        );
+        setTimeout(async () => {
+          const user = await postUser(newUser);
+          await AsyncStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+        }, 2500);
       }
     } catch (error) {
       setIsPostingUser(false);
@@ -41,32 +37,46 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Signup</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button
-        title="Signup"
-        onPress={handleSignup}
-        disabled={isPostingUser}
-      />
+    <View style={styles.outerContainer}>
+      <View style={styles.container}>
+        <TextBold style={styles.title}>Signup</TextBold>
+
+        <TextReg style={styles.inputHeading}>Username:</TextReg>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            editable={!isPostingUser}
+          />
+        </View>
+
+        <TextReg style={styles.inputHeading}>Email:</TextReg>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+            editable={!isPostingUser}
+          />
+        </View>
+
+        <TextReg style={styles.inputHeading}>Password:</TextReg>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+            editable={!isPostingUser}
+          />
+        </View>
+        <Button
+          title="Signup"
+          onPress={handleSignup}
+          disabled={isPostingUser}
+        />
+      </View>
     </View>
   );
 };
@@ -74,22 +84,59 @@ const SignUp = ({ navigation }) => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  container: {
+  outerContainer: {
     flex: 1,
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "white",
+  },
+  container: {
+    width: "95%",
     justifyContent: "center",
-    padding: 16,
+    alignItems: "center",
+    marginTop: 50,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: "center",
+    fontSize: 28,
+    marginBottom: 20,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    marginVertical: 10,
+    paddingHorizontal: 20,
+  },
+  image: {
+    width: 27,
+    height: 27,
+    marginRight: 10,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+    flex: 1,
+    height: 50,
+    fontSize: 16,
+    fontFamily: "Poppins",
+  },
+  button: {
+    position: "absolute",
+    bottom: 20,
+    width: "90%",
+    height: 50,
+    backgroundColor: "#007AFF",
     borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+  },
+  inputHeading: {
+    color: "rgba(0, 0, 0, 0.3)",
+    alignSelf: "flex-start",
   },
 });

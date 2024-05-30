@@ -1,13 +1,13 @@
 import { Alert } from "react-native";
 
-const showAlert = (setIsPostingUser) => {
+const showAlert = (setUsername, setIsPostingUser) => {
   setTimeout(() => {
     Alert.alert("Username already taken", "Please select another", [
-      { text: "OK"},
+      { text: "OK" },
     ]);
-    setIsPostingUser(false)
+    setUsername("");
+    setIsPostingUser(false);
   }, 2000);
-  
 };
 
 export default showAlert;

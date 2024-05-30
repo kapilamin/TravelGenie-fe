@@ -19,32 +19,7 @@ const Stack = createNativeStackNavigator();
 
 const BookingStack = () => {
   return (
-    <Stack.Navigator initialRouteName="login">
-      <Stack.Screen
-        name="login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="onboarding1"
-        component={OnboardingScreen1}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="onboarding2"
-        component={OnboardingScreen2}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="onboarding3"
-        component={OnboardingScreen3}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator initialRouteName="onboarding1">
       <Stack.Screen
         name="select-city"
         component={SelectCity}
