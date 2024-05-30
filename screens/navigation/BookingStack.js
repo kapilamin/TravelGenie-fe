@@ -14,6 +14,7 @@ import GenerateHotels from "../create-booking/GenerateHotels";
 import GenerateExcursions from "../create-booking/GenerateExcursions";
 import ConfirmBooking from "../create-booking/ConfirmBooking";
 import Login from "../auth/Login";
+import ExcursionDetails from "../create-booking/excursionDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,11 @@ const BookingStack = () => {
       <Stack.Screen
         name="confirm-booking"
         component={ConfirmBooking}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="excursion-details"
+        component={ExcursionDetails}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

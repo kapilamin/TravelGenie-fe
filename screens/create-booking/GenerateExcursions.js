@@ -74,7 +74,7 @@ const GenerateExcursions = ({ navigation, route }) => {
         </View>
         <Pressable
           onPress={() =>
-            navigation.navigate("excursionDetails", { excursion: item })
+            navigation.navigate("excursion-details", { excursion: item })
           }
         >
           <Image
