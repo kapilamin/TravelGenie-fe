@@ -50,7 +50,7 @@ const ConfirmBooking = ({ navigation, route }) => {
 
     addBooking(newBooking);
     postBooking(newBooking);
-    navigation.navigate("Existing Bookings");
+    navigation.navigate("My Bookings");
   };
 
   return (
@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignSelf: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
   heading: {
     fontSize: 18,

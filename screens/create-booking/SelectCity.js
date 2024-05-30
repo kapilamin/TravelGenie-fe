@@ -21,7 +21,6 @@ const SelectCity = ({ navigation }) => {
   return (
     <View style={styles.outerContainer}>
       <View style={styles.container}>
-        <Text>Welcome, {user.username}</Text>
         <TextBold style={styles.title}>Where do you want to go?</TextBold>
         <TextReg style={styles.inputHeading}>Flying from:</TextReg>
         <View style={styles.inputContainer}>
