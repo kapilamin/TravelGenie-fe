@@ -6,7 +6,7 @@ Welcome to **TravelGenie**,  an app designed to simplify and enhance your travel
 
 TravelGenie was developed as our group project during the final stages of our software developer course at Northcoders. This mobile application, built using React Native, integrates various Amadeus APIs and custom backend services using Appwrite to provide a seamless travel planning experience.
 
-A demonstration of the app can be found [here](https://youtu.be/06qBMPb7JRI?si=ChMWZ0m4Is1TeVcK).
+A video emonstration of the app can be found [here](https://youtu.be/06qBMPb7JRI?si=ChMWZ0m4Is1TeVcK).
 
 ## Features
 - **Excursions Feature:** Discover and book unique excursions tailored to your interests and location. This feature sets TravelGenie apart by offering  curated experiences that make your trips unforgettable.
