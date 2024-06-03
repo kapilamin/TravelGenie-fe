@@ -1,47 +1,55 @@
-# TravelGenie Frontend
+TravelGenie
+TravelGenie is a comprehensive travel planning and management application designed to simplify and enhance your travel experiences. Whether you're planning a weekend getaway or a month-long international adventure, TravelGenie provides the tools you need to organize, book, and enjoy your trip with ease.
 
-## Northcoders Software Development Final Project
+Features
+Itinerary Management: Create detailed itineraries with activities, accommodations, transportation, and more.
+Booking Integration: Book flights, hotels, and activities directly within the app.
+Expense Tracking: Keep track of your travel expenses and stay within budget.
+Offline Access: Access your itinerary and important travel information even without an internet connection.
+Recommendations: Receive personalized recommendations for destinations, restaurants, and attractions.
+Maps and Navigation: Integrated maps and navigation to help you find your way around new places.
+Travel Journals: Document your travels and share your experiences with friends and family.
+Installation
+Prerequisites
+iOS 13.0+ / Android 7.0+
+Internet connection for initial setup and booking features
+iOS
+Open the App Store on your device.
+Search for "TravelGenie."
+Tap the download button and install the app.
+Android
+Open the Google Play Store on your device.
+Search for "TravelGenie."
+Tap the download button and install the app.
+Usage
+Sign Up / Log In: Create an account or log in using your existing credentials.
+Create a Trip: Start by creating a new trip and adding basic details like destination and dates.
+Build Your Itinerary: Add activities, accommodations, and transportation to your itinerary. Use the built-in booking feature to make reservations.
+Track Expenses: Use the expense tracking feature to manage your travel budget.
+Access Offline: Download your itinerary for offline access.
+Explore and Enjoy: Use the app's recommendations and navigation features to explore your destination.
+Contributing
+We welcome contributions to improve TravelGenie! To contribute:
 
-Welcome to **TravelGenie**,  an app designed to simplify and enhance your travel experiences, from planning to execution.
+Fork the repository.
+Create a new branch (git checkout -b feature-branch).
+Make your changes.
+Commit your changes (git commit -m 'Add some feature').
+Push to the branch (git push origin feature-branch).
+Open a pull request.
+Support
+If you encounter any issues or have questions about using TravelGenie, please contact our support team at support@travelgenie.com or visit our Help Center.
 
-TravelGenie was developed as our group project during the final stages of our software developer course at Northcoders. This mobile application, built using React Native, integrates various Amadeus APIs and custom backend services using Appwrite to provide a seamless travel planning experience.
+License
+TravelGenie is licensed under the MIT License. See the LICENSE file for more information.
 
-A demonstration of the app can be found [here](https://youtu.be/06qBMPb7JRI?si=ChMWZ0m4Is1TeVcK).
+Acknowledgements
+Special thanks to all our users and contributors for their support and feedback.
 
-<img src="https://github.com/sjdmurden/Sound-Seeker-fe/assets/81564712/3ac77e4f-7855-4055-9398-6c2ea938a2f7" width=200/>
-<img src="https://github.com/sjdmurden/Sound-Seeker-fe/assets/81564712/66991a7e-c9d1-41f3-8c9d-97bbf478dd26" width=200/>
-<img src="https://github.com/sjdmurden/Sound-Seeker-fe/assets/81564712/5fd468c6-16fe-48da-9abe-749ceb0aad89" width=200/>
-<img src="https://github.com/sjdmurden/Sound-Seeker-fe/assets/81564712/dbc19da1-6284-453f-b7a6-8b18f52ab476" width=200/>
-<img src="https://github.com/sjdmurden/Sound-Seeker-fe/assets/81564712/83421a73-1f94-4dbf-836b-53b49ff2288b" width=200/>
-<img src="https://github.com/sjdmurden/Sound-Seeker-fe/assets/81564712/6a7a9a5f-62d1-4697-888d-4bbde3a7f855" width=200/>
+Thank you for choosing TravelGenie! We hope you have a fantastic travel experience.
 
-## Features
-- **Excursions Feature:** Discover and book unique excursions tailored to your interests and location. This feature sets TravelGenie apart by offering  curated experiences that make your trips unforgettable.
-- **Booking Integration:** Book flights, hotels, and activities directly within the app.
-- **Expense Tracking:** Keep track of your travel expenses and stay within budget.
-- **Recommendations:** Receive personalized recommendations for destinations, restaurants, and attractions.
 
-## Set up
-Below are instructions on how to run our app locally. 
-Due to the nature of the Spotify API this process is relatively lengthy, however, following the steps below should help you through the process.
 
-1. **Set Up Backend:** Ensure that the backend server is up and running. You will need to set up the backend separately by following the instructions in the [backend repository](https://github.com/kapilamin/TravelGenie-be).
-2. **Clone the Repository:** Clone this repository to your local machine using `git clone`.
-3. **Install Dependencies:** Navigate to the project directory and install dependencies by running `npm install`.
-5. **Amadeus API:** Obtain API key for [Amadeus](https://developers.amadeus.com/) for more information watch this [video](https://www.youtube.com/watch?v=Lyy26SlgBZU&t=160s).
-6. **Run the App:** After configuring the APIs, run the app on your device or simulator using `npm run start`.
-7. **Explore and Enjoy:** Once the app is running, explore the various features and functionalities to plan your perfect trip.
-## Technologies Used
-- **React Native:** TravelGenie is built using React Native.
-- **Expo:** Utilized for a range of handy packages including maps, secure store and authorisation.
-- **Amadeus API:** Integrated to provide comprehensive travel data and facilitate seamless booking of excursions.
-- **Appwrite Backend:** Provides a robust foundation for managing user data and app functionalities.
-## Contributors
-- Kapil Amin [@kapilamin](https://github.com/kapilamin)
-- Luke Di Bartolomeo [@LukeDiB](https://github.com/LukeDiB)
-- Andrew Lowes [@drewfullstack](https://github.com/drewfullstack)
-- Ziyardee Alhassan [@Ziyardeen](https://github.com/Ziyardeen)   
-## Feedback
-We welcome feedback to enhance TravelGenie. If you encounter issues or have suggestions for new features, feel free to open an issue.
 
-We hope you enjoy! ✈️🌍 
+
+
