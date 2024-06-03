@@ -1,4 +1,4 @@
-# Sound Seeker Frontend
+# TravelGenie Frontend
 
 ## Northcoders Software Development Final Project
 
